@@ -1,19 +1,35 @@
 const grid = document.querySelector(".container");
+const clear = document.querySelector("#clear");
+const changeGrid = document.querySelector("#gridSize");
+var slider = document.getElementById("rangeInput");
 
-var gridSize = 16;
+clear.addEventListener('click', clearGrid);
+changeGrid.addEventListener('click', newGrid);
+
+createGrid(16);
 
 function createGrid(gridSize) {
-let size = (gridSize * gridSize);
+  grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr`;
+  grid.style.gridTemplateRows = `repeat(${gridSize}, 1fr`;
+  let size = gridSize * gridSize;
   for (let i = 0; i < size; i++) {
     const div = document.createElement("div");
     div.classList.add("cell");
-    div.addEventListener('mouseover', changeColor)
     grid.appendChild(div);
+    div.addEventListener("mouseover", draw);
   }
 }
 
-createGrid(gridSize);
+function draw(e) {
+  e.target.style.backgroundColor = "black";
+}
 
-function changeColor(e) {
-    e.target.style.backgroundColor = 'black';
+function clearGrid() {
+  var cells = grid.querySelectorAll("div");
+  cells.forEach((cell) => (cell.style.backgroundColor = "white"));
+}
+
+function newGrid() {
+  document.querySelectorAll(".cell").forEach((e) => e.remove());
+  createGrid(slider.value);
 }
