@@ -11,8 +11,17 @@
   <body>
     <h1>Etch-A-Sketch</h1>
     <div class="container">
-      <div class="grid"></div>
       <div class="tools">
+        <div class="buttons">
+          <button id="color">Color</button>
+          <button id="clear">Clear</button>
+          <button id="eraser">Eraser</button>
+          <button id="random">Random</button>
+        </div>
+        <input type="color" id="colorPicker">
+      </div>
+      <div class="grid"></div>
+      <div class="gridControl">
         <div>Grid Size</div>
         <div class="slider">
           <input
@@ -26,14 +35,7 @@
             onchange="gridSize(this.value)"
           />
           <div id="showGridSize"></div>
-        <div class="buttons">
-          <button id="color">Color</button>
           <button id="gridSize">Change Grid Size</button>
-          <button id="clear">Clear</button>
-          <button id="eraser">Eraser</button>
-          <button id="random">Random</button>
-        </div>
-        <input type="color" id="colorPicker">
       </div>
     </div>
   </body>

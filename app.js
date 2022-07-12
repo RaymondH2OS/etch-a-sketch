@@ -1,3 +1,7 @@
+const DEFAULT_GRID = 16;
+const DEFAULT_MODE = "color";
+const DEFAULT_COLOR = "black";
+
 const grid = document.querySelector(".grid");
 const clear = document.querySelector("#clear");
 const changeGrid = document.querySelector("#gridSize");
@@ -9,10 +13,13 @@ const eraserBtn = document.getElementById("eraser");
 const randomBtn = document.getElementById("random");
 const colorPicker = document.getElementById("colorPicker");
 
-var defaultGridSize = 16;
-
-const DEFAULT_MODE = "color";
-const DEFAULT_COLOR = "black";
+// Event Listeners
+clear.addEventListener("click", clearGrid);
+changeGrid.addEventListener("click", newGrid);
+colorBtn.onclick = () => setCurrentMode("color");
+randomBtn.onclick = () => setCurrentMode("random");
+eraserBtn.onclick = () => setCurrentMode("eraser");
+colorPicker.oninput = (e) => setCurrentColor(e.target.value);
 
 let currentMode = DEFAULT_MODE;
 let currentColor = DEFAULT_COLOR;
@@ -20,14 +27,6 @@ let currentColor = DEFAULT_COLOR;
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
-
-clear.addEventListener("click", clearGrid);
-changeGrid.addEventListener("click", newGrid);
-
-colorBtn.onclick = () => setCurrentMode("color");
-randomBtn.onclick = () => setCurrentMode("random");
-eraserBtn.onclick = () => setCurrentMode("eraser");
-colorPicker.oninput = (e) => setCurrentColor(e.target.value);
 
 function setCurrentMode(newMode) {
   activateButton(newMode);
@@ -104,7 +103,7 @@ function activateButton(newMode) {
 }
 
 window.onload = () => {
-  createGrid(defaultGridSize);
-  gridSize(defaultGridSize);
+  createGrid(DEFAULT_GRID);
+  gridSize(DEFAULT_GRID);
   activateButton(DEFAULT_MODE);
 };
